@@ -105,13 +105,7 @@ pipeline {
                 }
             }
         }
-        stage('Dependency vulnerability tests') {
-            steps {
-                echo "-=- run dependency vulnerability tests -=-"
-                sh "./mvnw dependency-check:check"
-                dependencyCheckPublisher failedTotalHigh: '0', unstableTotalHigh: '1', failedTotalNormal: '2', unstableTotalNormal: '5'
-            }
-        }
+
   //      stage('Push Docker image') {
   //          steps {
   //              echo "-=- push Docker image -=-"

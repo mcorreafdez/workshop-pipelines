@@ -3,7 +3,10 @@
 pipeline {
     agent {
         // how the pipeline will be built
-      docker { image 'python:3.5.1' }      
+      docker {
+        image 'adoptopenjdk/openjdk11:jdk-11.0.3_7'
+        args '--network ci --mount type=volume,source=ci-maven-home,target=/root/.m2'
+        }
     }
 
 //    environment {
@@ -11,10 +14,10 @@ pipeline {
 //    }
 
     stages {
-        stage('hello-stage') {
+        stage('Compile') {
             steps {
-                // steps for stage 1 come here
-               sh "echo 'Hello'"
+               echo "-=- compiling project -=-"
+               sh "./mvnw clean compile"
             }
         }
     }
